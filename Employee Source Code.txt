@@ -1,0 +1,79 @@
+
+
+
+
+         void BindData(){
+
+
+         SqlCommand cnn = new SqlCommand("Select * from emptab", con);
+
+         SqlDataAdapter da = new SqlDataAdapter(cnn);
+         DataTable table = new DataTable();
+         da.Fill(table);
+
+         dataGridView1.DataSource = table;
+
+
+         
+
+
+
+
+
+       }
+
+
+
+       Add Code
+
+       con.Open();
+
+            SqlCommand cnn = new SqlCommand("Insert into emptab(id,employeename,age,email,salary,dob,benefit) Values(@id,@employeename,@age,@email,@salary,@dob,@benefit)", con);
+
+            cnn.Parameters.AddWithValue("@Id", int.Parse(textBox1.Text));
+            cnn.Parameters.AddWithValue("@EmployeeName", textBox2.Text);
+
+            cnn.Parameters.AddWithValue("@Age", int.Parse(textBox3.Text));
+
+            cnn.Parameters.AddWithValue("@Email", textBox4.Text);
+
+            cnn.Parameters.AddWithValue("@Salary", int.Parse(textBox5.Text));
+
+            cnn.Parameters.AddWithValue("@Dob", DateTime.Parse(textBox6.Text));
+
+            cnn.Parameters.AddWithValue("@Benefit", textBox7.Text);
+
+            cnn.ExecuteNonQuery();
+            con.Close();
+            BindData();
+
+
+
+
+        New Code
+
+
+         textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+             textBox5.Text = "";
+            textBox6.Text = "";
+            textBox7.Text = "";
+            
+
+
+
+        Delete Code
+
+
+       SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-ADG77QL\SQLEXPRESS;Initial Catalog=employeedb;Integrated Security=True");
+
+            con.Open();
+            SqlCommand cnn = new SqlCommand("Delete emptab where id=@id", con);
+            cnn.Parameters.AddWithValue("@Id", int.Parse(textBox1.Text));
+           
+            cnn.ExecuteNonQuery();
+            con.Close();
+
+            MessageBox.Show("Data Deleted");
